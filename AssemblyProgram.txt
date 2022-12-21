@@ -1,0 +1,127 @@
+   ORG 10 // Dedicate memory to program
+FST, SKI
+   BUN FST // Jump to FST function
+   CLA
+   INP // Take in input
+   STA ONH // Store first bit
+FS2, SKI
+   BUN FS2
+   CLA // Clear AC
+   INP // Take in input
+   STA TWH // Store second bit
+OXX, LDA ONH //Convert from hex to decimal val
+   ADD THI
+   STA ONE
+   LDA TWH
+   ADD THI
+   STA TWO
+CON, LDA ONE // Load BITONE to AC 
+   CLE
+   CIL // CIL 3x to multiply by 8
+   CIL
+   CIL
+   ADD TWO // Add BITTWO to BITONE
+   STA FIN // Store BITONE to FINAL
+CHEK, CLA // Clear AC
+   CLE // Clear E
+   LDA FIN // Load FINAL to AC
+   CIR // Divide by two
+   SZE // If E is 0 skip next instruction
+   BUN DER // Jump to function to make it even
+   BUN SUP // Jump to function to sum up all even sums
+DER, CLA // Clear AC
+   LDA FIN // Load in final
+   ADD SUB // Decrement by one
+   STA FIN //Store into final
+SUP, CLE
+   LDA FIN //Load FINAL
+   STA TEP//Store FINAL to TEMP
+   CLA //Clear AC
+   LDA SUM
+   ADD TEP
+   STA SUM
+   LDA FIN
+   ADD NEG   //Go to next even number
+   CLE
+   STA FIN
+   SZA //If AC is 0 skip
+   BUN SUP
+   BUN TES
+TES, CLA
+   CLE
+   LDA SUM
+   STA BOT //TEMP SUM VALUE
+TEM, CLA
+   CLE
+   LDA BOT
+   ADD TEN // Decrement by ten
+   STA BOT
+   SNA //IF NEG LEAVE METHOD
+   BUN ADY
+   BUN NEX
+ADY, CLA // COUNTS THE NUM OF TIMES 10 IS DECREMENTED
+   CLE
+   LDA MID
+   INC
+   STA MID
+   BUN TEM
+NEX, CLA
+   CLE
+   LDA BOT
+   ADD POS
+   STA BOT
+PIE, CLA
+  CLE
+  LDA SUM
+  CIR
+  CIR
+  CIR
+  CIR
+  CIR
+  CIR
+  CIR //TO GET LEFT MOST BIT
+  STA TOP
+  BUN SIS
+SIS, CLA
+   CLE
+   LDA TOP
+   ADD THR //get to char value
+   OUT
+   BUN SIP
+SIP,CLA
+   CLE
+   LDA MID
+   ADD THR //get to char value
+   OUT
+   BUN SIL
+SIL, CLA
+   CLE
+   LDA BOT
+   ADD THR //get to char value
+   OUT
+   HLT
+NUM, DEC 0
+BOT, DEC 0 //top
+TOP, DEC 0 //bot
+THR, DEC 48 //to get to char value
+POS, DEC 10
+MID, DEC 0 //MIDDLE NUM
+TEN, DEC -10
+NUH, DEC -100
+HUN, DEC 100
+FIN, DEC 0 // Variable octal to decimal outcome
+ONH, HEX 0 // Variable for first number HEX
+TWH, HEX 0 // Variable for second number HEX
+SUM, DEC 0 // Final Variable that is sum of all even numbers
+TEP, DEC 0 //temporary value
+TWO, DEC 0 // Decimal version of two bit
+ONE, DEC 0 // Decimal version of one bit
+THI, HEX -30 // Hex for conversion
+NII, HEX 30
+CYX, DEC 0
+GGX, DEC 0
+NEG, DEC -2
+LSX, DEC 0
+DDH, HEX 0 
+SUB, DEC -1
+   END
